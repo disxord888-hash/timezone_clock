@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="地図をクリックして経度・緯度からタイムゾーンを物理的に計算するワールドクロック">
+  <title>Physical Timezone Clock - 物理タイムゾーン時計</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header id="header">
+      <div class="header-content">
+        <div class="header-icon">🌍</div>
+        <div class="header-text">
+          <h1>Physical Timezone Clock</h1>
+          <p class="subtitle">地図をクリックして、経度から物理的にタイムゾーンを計算します</p>
+        </div>
+      </div>
+      <div class="header-formula">
+        <span class="formula">UTC offset = longitude × 4分/度（1分単位）</span>
+      </div>
+    </header>
+
+    <!-- Map Section -->
+    <section id="map-section">
+      <div class="map-wrapper">
+        <div id="leaflet-map"></div>
+        <div class="map-overlay-info">
+          <span>🖱️ クリックで時計を追加 • マーカーをクリックで削除</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clocks Section -->
+    <section id="clocks-section">
+      <div class="clocks-header">
+        <h2>⏰ 追加した時計</h2>
+        <button id="clear-all-btn" class="clear-btn" style="display:none;">すべて削除</button>
+      </div>
+      <div id="clocks-grid" class="clocks-grid">
+        <div class="empty-state" id="empty-state">
+          <div class="empty-icon">🗺️</div>
+          <p>地図をクリックして時計を追加してください</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
