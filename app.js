@@ -48,20 +48,25 @@
 
   // --- Utility Functions ---
 
+  const JST_OFFSET_MINUTES = 540; // JST = UTC+9 = 540 minutes
+
   function calcPhysicalOffsetMinutes(lng) {
     // Physical timezone: 1° longitude = 4 minutes, rounded to nearest minute
     return Math.round(lng * 4);
   }
 
   function formatOffset(offsetMinutes) {
-    const sign = offsetMinutes >= 0 ? '+' : '−';
-    const abs = Math.abs(offsetMinutes);
+    // Show difference from JST
+    const diff = offsetMinutes - JST_OFFSET_MINUTES;
+    if (diff === 0) return 'JST ±0';
+    const sign = diff > 0 ? '+' : '−';
+    const abs = Math.abs(diff);
     const hours = Math.floor(abs / 60);
     const minutes = abs % 60;
     if (minutes === 0) {
-      return `UTC${sign}${hours}`;
+      return `JST ${sign}${hours}h`;
     }
-    return `UTC${sign}${hours}:${minutes.toString().padStart(2, '0')}`;
+    return `JST ${sign}${hours}h${minutes.toString().padStart(2, '0')}m`;
   }
 
   function formatCoord(lng, lat) {
